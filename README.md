@@ -1,7 +1,7 @@
 # WebHCDemo
 Link demo: https://hanhchinh.somee.com/
 
-Deploy to somee:/
+Deploy to somee:<br />
 Create project with your language and version. I use ASP .NET CORE 3.1 to implement this project. /
 Create free account in somee/
 Use SQL Server management studio to create database./
