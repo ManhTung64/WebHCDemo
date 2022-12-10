@@ -1,0 +1,31 @@
+{
+  "CacheSourceKey": "10vldxu",
+  "CachePdfKey": "10vldxu/10vldxu-1kx12kp.pdf",
+  "CacheXpzKey": "10vldxu/10vldxu-lz76f7.xpz",
+  "CacheInfoKey": "10vldxu/10vldxu-lz76f7.json",
+  "CacheCopyKey": null,
+  "Document": "Type=FileSystem;File=\"Tên tệp.docx\";Location=\"Type=Physical;Path=file\"",
+  "DocumentFileName": "Tên tệp.docx",
+  "DownloadFileName": null,
+  "InputOptions": {
+    "$type": "GleamTech.DocumentUltimate.WordProcessingInputOptions, GleamTech.DocumentUltimate",
+    "FieldFileName": "Tên tệp.docx",
+    "UpdateFields": true,
+    "Encoding": null,
+    "Format": "Docx",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Attachments": [],
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "10vldxu",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  },
+  "Attachments": []
+}

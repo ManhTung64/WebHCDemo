@@ -1,0 +1,31 @@
+{
+  "CacheSourceKey": "5t9buu",
+  "CachePdfKey": "5t9buu/5t9buu-1r9jhyp.pdf",
+  "CacheXpzKey": "5t9buu/5t9buu-z7fm7a.xpz",
+  "CacheInfoKey": "5t9buu/5t9buu-z7fm7a.json",
+  "CacheCopyKey": null,
+  "Document": "Type=FileSystem;File=ex3.docx;Location=\"Type=Physical;Path=file\"",
+  "DocumentFileName": "ex3.docx",
+  "DownloadFileName": null,
+  "InputOptions": {
+    "$type": "GleamTech.DocumentUltimate.WordProcessingInputOptions, GleamTech.DocumentUltimate",
+    "FieldFileName": "ex3.docx",
+    "UpdateFields": true,
+    "Encoding": null,
+    "Format": "Docx",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Attachments": [],
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "5t9buu",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  },
+  "Attachments": []
+}

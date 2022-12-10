@@ -1,0 +1,31 @@
+{
+  "CacheSourceKey": "nler4q",
+  "CachePdfKey": "nler4q/nler4q-1r9jhyp.pdf",
+  "CacheXpzKey": "nler4q/nler4q-1xy8i30.xpz",
+  "CacheInfoKey": "nler4q/nler4q-1xy8i30.json",
+  "CacheCopyKey": null,
+  "Document": "Type=FileSystem;File=ex3.docx;Location=\"Type=Physical;Path=file\"",
+  "DocumentFileName": "ex3.docx",
+  "DownloadFileName": null,
+  "InputOptions": {
+    "$type": "GleamTech.DocumentUltimate.WordProcessingInputOptions, GleamTech.DocumentUltimate",
+    "FieldFileName": "ex3.docx",
+    "UpdateFields": true,
+    "Encoding": null,
+    "Format": "Docx",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Attachments": [],
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "nler4q",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  },
+  "Attachments": []
+}

@@ -1,0 +1,31 @@
+{
+  "CacheSourceKey": "1ni7lzn",
+  "CachePdfKey": "1ni7lzn/1ni7lzn-1kx12kp.pdf",
+  "CacheXpzKey": "1ni7lzn/1ni7lzn-15h09uk.xpz",
+  "CacheInfoKey": "1ni7lzn/1ni7lzn-15h09uk.json",
+  "CacheCopyKey": null,
+  "Document": "Type=FileSystem;File=\"Tên tệp.docx\";Location=\"Type=Physical;Path=file\"",
+  "DocumentFileName": "Tên tệp.docx",
+  "DownloadFileName": null,
+  "InputOptions": {
+    "$type": "GleamTech.DocumentUltimate.WordProcessingInputOptions, GleamTech.DocumentUltimate",
+    "FieldFileName": "Tên tệp.docx",
+    "UpdateFields": true,
+    "Encoding": null,
+    "Format": "Docx",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Attachments": [],
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "1ni7lzn",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  },
+  "Attachments": []
+}

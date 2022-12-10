@@ -1,0 +1,391 @@
+﻿@using GleamTech.AspNet.Core
+@using GleamTech.DocumentUltimate
+@using GleamTech.DocumentUltimate.AspNet
+@using GleamTech.DocumentUltimate.AspNet.UI
+
+<!DOCTYPE html>
+@{
+    var str = "";
+    if (ViewBag.fileName != null)
+    {
+        str = "" + ViewBag.fileName + "";
+    }
+    var documentViewer = new DocumentViewer
+            {
+                Width = 800,
+                Height = 800,
+                Document = str
+            };
+}
+<html>
+<head>
+    <title>Document Viewer</title>
+    @if (ViewBag.fileName != null)
+    {
+        @this.RenderHead(documentViewer)
+    }
+</head>
+<body onload="myFunction()" style="background-color:gray;">
+    <form id="form" asp-controller="Home" asp-action="Create" method="post">
+        <div class="text-center bg-white mb-5 pb-2">
+            <input name="filename" type="text" placeholder="Nhập tên tệp..." value="@ViewBag.fullFileName"/>
+            <select name="font">
+                <option value="Times New Roman">Times new roman</option>
+                <option value="Arial">Arial</option>
+                <option value="Calibri">Calibri</option>
+            </select>
+            <input type="number" name="size" value="12" min="1" max="100" />
+        </div>
+        <div class="d-flex justify-content-center align-items-center row">
+            <div class="col-10 row bg-white">
+                <div class="col-6 row mt-3">
+                    <div class="col-12 mb-5">
+                        <input type="text" name="where" value="UBND Thành phố Hà Nội" />
+                    </div>
+                    <div class="col-12">
+                        Số: <input type="text" name="no" value="23/2022/QD" />
+                    </div>
+                </div>
+                <div class="col-6 row mt-3">
+                    <div class="font-weight-bold col-12 text-center">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</div>
+                    <div class="font-weight-bold col-12 text-center">Độc lập - Tự do - Hạnh phúc</div>
+                    <div class="col-12 row d-flex justify-content-center align-items-center">
+                        <input class="col-3 border-0" type="text" name="date1" value="Nghĩa Tâm " />
+                        , ngày <input class="col border-0" type="text" name="date2" value="10" />
+                        , tháng <input class="col border-0" type="text" name="date3" value="12" />
+                        , năm<input class="col border-0" type="text" name="date4" value="2022" />
+                    </div>
+                </div>
+                <div class="col-12 mt-5 row">
+                    <div class="col-12 text-center">
+                        <select class="font-weight-bold" name="tit">
+                            <option value="QUYẾT ĐỊNH" selected>QUYẾT ĐỊNH</option>
+                            <option value="CÔNG VĂN">CÔNG VĂN</option>
+                            <option value="THÔNG BÁO">THÔNG BÁO</option>
+                            <option value="NGHỊ ĐỊNH">NGHỊ ĐỊNH</option>
+                        </select>
+                    </div>
+                    <div class="col-12 text-center mb-5 mt-1">
+                        <div class="form-outline d-flex justify-content-center">
+                            V/v:<input class="form-control" type="text" id="searchOnce" style="width:500px;" placeholder="Nhập tên văn bản..." name="subTitle"/>
+                            <button type="button" class="btn btn-primary" onclick="runSpeechRecognition()">
+                                <i class="fas fa-microphone"></i>
+                            </button>
+                            <button type="button" class="btn btn-success ml-3" onclick="search()">
+                                Áp dụng
+                            </button>
+                        </div>
+                        <div class="form-group mt-3 hide" id="apply" style="margin-left:40%;">
+
+                            <div class="input-group">
+                                <span class="h6">Căn cứ:</span>
+
+                            </div>
+                            <div class="input-group">
+                            <input type="checkbox" id="cc1" value="Điều lệ tổ chức và hoạt động"/>
+                            Điều lệ tổ chức và hoạt động
+                        </div>
+                        <div class="input-group">
+                            <input type="checkbox" id="cc2"/>
+                                Biên bản họp Hội đồng Quản trị
+                        </div>
+                        <div class="input-group">
+                            <input type="checkbox" id="cc3"/>
+                                Yêu cầu hoạt động kinh doanh
+                        </div>
+                            <div class="input-group">
+                                <input type="checkbox" id="cc4"/>
+                                Năng lực và phẩm chất
+                            </div>
+                            <div class="input-group ml-5 ">
+                                
+                                <input class="btn btn-info" onclick="the_next()" type="button" style="cursor:pointer;" value="Tiếp theo">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group mt-3 hide" id="apply2" style="margin-left:40%;">
+
+                            <div class="input-group">
+                                <span class="h6">Nghĩa vụ:</span>
+
+                            </div>
+                            <div class="input-group">
+                                <input type="checkbox" id="nv1"/>
+                                Đối với công ty
+                            </div>
+                            <div class="input-group">
+                                <input type="checkbox" id="nv2"/>
+                                Đối với pháp luật
+                            </div>
+                            
+                            <div class="input-group ml-5">
+                                <button type="button" class="btn btn-success ml-3 mr-1" onclick="search()">
+                                Quay lại
+                            </button>
+                                <input class="btn btn-info" onclick="the_last()" type="button" style="cursor:pointer;" value="Tiếp theo">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group mt-3 hide" id="apply3" style="margin-left:40%;">
+
+                            <div class="input-group">
+                                <span class="h6">Các quyền:</span>
+
+                            </div>
+                            <div class="input-group">
+                                <input type="checkbox" id="q1"/>
+                                Yêu cầu các bộ phận trong doanh nghiệp lập chứng từ
+                            </div>
+                            <div class="input-group">
+                                <input type="checkbox" id="q2" />
+                                Yêu cầu các bộ phận trong doanh nghiệp phối kết hợp
+                            </div>
+                            <div class="input-group">
+                                <input type="checkbox" id="q3" />
+                                Ký duyệt
+                            </div>
+                            <div class="input-group">
+                                <input type="checkbox" id="q4" />
+                                Quyền cơ bản về bản thân: lương, bảo hiểm ,etc. 
+                            </div>
+                            <div class="input-group ml-5 ">
+                                <button type="button" class="btn btn-success ml-3 mr-1" onclick="search()">
+                                Quay lại
+                            </button>
+                                <input class="btn btn-info" type="button" style="cursor:pointer;" value="Hoàn thành" onclick="done()">
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="col-12 text-center">
+                        <h5 class="mb-5">HỢP ĐỒNG THÀNH VIÊN</h5>
+                    </div>
+                </div>
+                <div class="col-12" style="margin-bottom:20%;" id="show"></div>
+                <div class="hide col-12 justify-content-center" id="main">
+                <div class="col-12">
+                    <textarea class="col-12 font-italic" rows="4" id="tex1" form="form" name="cancu" value="">- Căn cứ vào...</textarea>
+                </div>
+                <h5 class="col-12 text-center mb-4">QUYẾT ĐỊNH</h5>
+                <div class="col-12">
+                    <p class="font-weight-bold">Điều 1: Nay bổ nhiệm</p>
+                    Họ và tên: <input class="mr-5 mb-1" type="text" name="ten" value="NGUYỄN MẠNH TÙNG" />
+                    Giới tính: <select class="mb-1" name="gioitinh">
+                        <option>Nam</option>
+                        <option>Nữ</option>
+                        <option>Khác</option>
+                    </select>
+                    <br />
+                    Sinh ngày: <input class="mr-5 pl-5 mb-1" type="date" name="ngaysinh" />
+                    Dân tộc: <input class="mr-3" name="dantoc" type="text" value="Tày" />
+                    Quốc tịch: <input class="" name="quoctich" type="text" value="Việt Nam" />
+                    <br />
+                    Số CCCD: <input name="cccd" class="ml-2 mb-1" type="text" value="012345678934" />
+                    <br />
+                    Ngày cấp: <input class="mr-5 pl-5 mb-1 ml-1" type="date" name="ngaycap" />
+                    Nơi cấp: <input class="mr-3" name="noicap" type="text" value="Yên Bái" />
+                    Ngày hết hạn: <input class="" name="hethan" type="date" />
+                    <br />
+                    <table class="border-0">
+                        <tr class="">
+                            <td>Địa chỉ thường trú:</td>
+                            <td class=""><input name="diachi" class="ml-2 mb-1" style="width:500px;" type="text" value="Nghĩa Tâm, Văn Chấn, Yên Bái" /></td>
+                        </tr>
+                        <tr>
+                            <td>Chỗ ở hiện tại:</td>
+                            <td><input name="hientai" class="ml-2 mb-1" style="width:500px;" type="text" value="55/21 Lê Văn Lương, Thanh Xuân, Hà Nội" /></td>
+                        </tr>
+                        <tr>
+                            <td>Điện thoại: </td>
+                            <td><input name="sdt" class="ml-2 mb-1" style="width:500px;" type="text" value="0962986803" /></td>
+                        </tr>
+                        <tr>
+                            <td>Email: </td>
+                            <td><input name="email" class="ml-2 mb-1" style="width:500px;" type="email" value="abc@gmail.com" /></td>
+                        </tr>
+                        <tr>
+                            <td>Giữ chức vụ: </td>
+                            <td><input name="detail" class="ml-2 mb-1" style="width:500px;" type="text" value="Kế toán của UBND TP Hà Nội " />từ ngày ký quyết định.</td>
+                        </tr>
+                    </table>
+                    <span class="font-weight-bold">Điều 2: </span>
+                    Ông/bà: <input value="NGUYỄN MẠNH TÙNG" class="mb-1" type="text" /> có các nghĩa vụ như sau:
+                    <br />
+                    <textarea class="col-12 font-italic" form="form" name="contentnv" id="tex2" rows="4">- Tuân thủ ...</textarea>
+                    <br />
+                    Và các quyền:
+                    <br />
+                    <textarea class="col-12 font-italic" form="form" name="contentquyen" id="tex3" rows="4">- Được đóng bảo hiểm ...</textarea>
+                    <br />
+                    <span class="font-weight-bold">Điều 3: </span> Quyết định này có hiệu lực kể từ ngày ký.
+                    <div class="col-12 row mb-5 mt-5">
+                        <div class="col-6">
+                            <span class="font-weight-bold">Nơi nhận </span>
+                            <input type="text" class="col-8" name="noinhan" value="-  Các phòng ban và ông/bà Nguyễn Mạnh Tùng" />
+                        </div>
+                        <div class="col-6 text-center row">
+                            <div class="col-12">
+                                <input class="font-weight-bold col-6" value="CHỦ TỊCH UBND TP HÀ NỘI" type="text" name="nguoiky" />
+                            </div>
+                            <div class="col-12">
+                                <span>(Ký và ghi rõ họ tên)</span>
+                            </div>
+                            <div class="col-12">
+                                <input class="mt-5" type="text" name="namenguoiky" value="Nguyễn Văn A" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+            @{
+                if (ViewBag.fileName != null)
+                {
+                                                                                                                                    <button class="btn btn-info" type="button" data-toggle="modal" data-target="#myModal" id="pre2">Xem trước</button>
+                }
+                else
+                {
+                                                                                                                                    <input class="btn btn-info" type="submit" name="pre" value="Preview" id="pre1" />
+                }
+            }
+            <input class="btn btn-danger" type="submit" name="del" value="Xóa" />
+            <input class="btn btn-success" type="submit" name="save" value="Lưu" />
+        </div>
+    </form>
+    <!-- The Modal -->
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content" style="margin-left:-200px;width:900px;">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">@ViewBag.fileName</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    @this.RenderHead(documentViewer)
+                    @this.RenderBody(documentViewer)
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script>
+        function myFunction() {
+            document.getElementById("pre2").click();
+        }
+        function runSpeechRecognition() {
+            document.getElementById('apply').classList.add("hide");
+        var audio = new Audio('js/speak.mp3');
+        audio.play();
+        setTimeout(() => {
+            document.getElementById('searchOnce').value = '';
+            // get output div reference
+            var output = document.getElementById("output");
+            // get action element reference
+            var action = document.getElementById("action");
+            var sea = document.getElementById("sea");
+            // new speech recognition object
+            var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+            var recognition = new SpeechRecognition();
+
+            // This runs when the speech recognition service starts
+            recognition.onstart = function () {
+                action.innerHTML = "<span>Hãy nói....</span>";
+            };
+
+            recognition.onspeechend = function () {
+                action.innerHTML = "<span>Đã hoàn thành</span>";
+                recognition.stop();
+            };
+
+            // This runs when the speech recognition service returns result
+            recognition.onresult = function (event) {
+                var transcript = event.results[0][0].transcript;
+                var confidence = event.results[0][0].confidence;
+                // document.getElementById("search").setAttribute('value', "" + transcript + "");
+                document.getElementById('searchOnce').value = "" + transcript + "";
+                search();
+            };
+
+            // start recognition
+            recognition.start();
+        }, 1500);
+
+    }
+    function search(){
+            var sear = document.getElementById('searchOnce').value.toLowerCase();
+            var pos = sear.search("bổ nhiệm");
+            if (pos > -1) {
+                document.getElementById('apply').classList.remove("hide");
+            }
+            else return;
+        
+    }
+    function the_next(){
+        var text = "";
+        if(document.getElementById('cc1').checked == true)
+        {
+           text = "- Căn cứ vào Điều lệ tổ chức và hoạt động của Công ty cổ phần/Cơ quan ..... ;\n";
+        }
+        if(document.getElementById('cc2').checked == true)
+        {
+          text += "- Căn cứ vào Biên bản họp Hội đồng Quản trị Công ty cổ phần/Cơ quan .........;\n";
+        }
+        if(document.getElementById('cc3').checked == true)
+        {
+           text += "- Căn cứ vào yêu cầu hoạt động kinh doanh;\n";
+        }
+        if (document.getElementById('cc4').checked == true) {
+           text += "- Xét năng lực và phẩm chất cán bộ;";
+        }
+        document.getElementById('tex1').value = text;
+
+        document.getElementById('apply').classList.add("hide");
+        document.getElementById('apply2').classList.remove("hide");
+    }
+        function the_last(){
+            var text = "";
+            if (document.getElementById('nv1').checked == true) {
+                text = "- Giúp giám đốc tổ chức công tác kế toán, thống kê, hạch toán kinh doanh cho doanh nghiệp;\nPhải tổ chức, đôn đốc, kiểm tra các nhân viên kế toán của mình, thực hiện đúng chức năng nhiệm vụ của kế toán;\n";
+            }
+            if (document.getElementById('nv2').checked == true) {
+                text += "- Tuân thủ Luật pháp đồng thời tuân thủ quy chế quản lý tài chính;";
+            }
+        document.getElementById('tex2').value = text;
+        document.getElementById('apply2').classList.add("hide");
+        document.getElementById('apply3').classList.remove("hide");
+            }
+            function done(){
+                var text = "";
+            if (document.getElementById('q1').checked == true) {
+                text = "- Yêu cầu các bộ phận trong doanh nghiệp lập chứng từ cho các nghiệp vụ kế toán phát sinh ở bộ phận đó một cách chính xác và chuyển về phòng kế toán các chứng từ đó đầy đủ, kịp thời;\n";
+            }
+            if (document.getElementById('q2').checked == true) {
+                text += "- Yêu cầu các bộ phận trong doanh nghiệp phối kết hợp thực hiện các công việc có liên quan;\n";
+            }
+            if (document.getElementById('q3').checked == true) {
+                text += "- Ký duyệt các chứng từ, báo cáo kinh tế và phải bảo đảm tính hợp lệ, hợp pháp của các giấy tờ này.\n";
+            }
+            if (document.getElementById('q4').checked == true) {
+                text += "- Ông (bà) ……… được hưởng lương, bảo hiểm xã hội, chế độ công tác phí theo quy định trong Hợp đồng lao động và các quy chế tài chính khác của Công ty.";
+            }
+            document.getElementById('tex3').value = text;
+            document.getElementById('apply').classList.add("hide");
+            document.getElementById('apply2').classList.add("hide");
+            document.getElementById('apply3').classList.add("hide");
+            document.getElementById('show').classList.add("hide");
+            document.getElementById('main').classList.remove("hide");
+            }
+    </script>
+</body>
+</html>

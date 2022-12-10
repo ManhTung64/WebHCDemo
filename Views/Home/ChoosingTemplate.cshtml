@@ -1,0 +1,254 @@
+﻿@model List<Template>
+
+<div class="row container-fluid">
+    <div class="col-1 mt-3">
+        <div class="col-12">
+            
+        </div>
+    </div>
+    <div class="col-11 mt-5">
+        <div class="row">
+            <div class="row" id="default">
+                @for (var i = 0; i < Model.Count - 1 && i <= 5; i++)
+                {
+                    var name = "#" + @Model[i].modalId + "";
+                    <div class="col-2 templ bg-light">
+                        <button data-toggle="modal" data-target="@name" class="w-100 bg-light border-0">
+                            <img src="@Model[i].url" class="w-100" height="200" width="200">
+                            <p class="text-center">@Model[i].title</p>
+                        </button>
+                    </div>
+                }
+            </div>
+            <div class="hide row" id="all">
+                @foreach (var template in Model)
+                {
+                    var name = "#" + template.modalId + "";
+                    <div class="col-2 templ bg-light">
+                        <button data-toggle="modal" data-target="@name" class="w-100 bg-light border-0">
+                            <img src="@template.url" class="w-100" height="200" width="200">
+                            <p class="text-center">@template.title</p>
+                        </button>
+
+                    </div>
+                }
+            </div>
+            <div class="col-12"><hr /></div>
+            <div class="col-12">
+                <a style="cursor:pointer;" id="show" onclick="showAll()" class="float-right text-info">Xem tất cả mẫu</a>
+                <a style="cursor:pointer;" id="back" onclick="back()" class="float-right hide text-info">Thu gọn</a>
+            </div>
+            <div class="col-12 mb-1">
+                <div class="input-group ">
+                    <div class="form-outline">
+                        <input type="search" id="search" class="form-control" placeholder="Search" style="width:300px;" onkeydown="search(2)" />
+                    </div>
+                    <button type="button" class="btn btn-primary" onclick="runSpeechRecognition()">
+                        <i class="fas fa-microphone"></i>
+                    </button>
+                    <span style="margin-left:20px; margin-top:5px;" id="action"></span>
+                </div>
+            </div>
+            <div class="col-12 row hide list-group list-group-light" name="kethon">
+                <div class="col-12">
+                    @{
+                        var mod = "#" + Model[0].modalId + "";
+                    }
+                    <button data-toggle="modal" data-target="@mod" class="list-group-item list-group-item-action px-3 border-0 ripple col-12">
+                        <img class="float-left" src="https://cms.luatvietnam.vn/uploaded/Images/Original/2019/04/11/to-khai-dang-ky-ket-hon-chuan_1104141938.jpg" height="100" width="100">
+                        <span class="float-left ml-3 mt-3">Mẫu đơn đăng ký kết hôn</span>
+                    </button>
+                </div>
+            </div>
+            <div class="col-12 row hide list-group list-group-light" name="kethon">
+                <div class="col-12">
+                    @{
+                        mod = "#" + Model[1].modalId + "";
+                    }
+                    <button data-toggle="modal" data-target="@mod" class="list-group-item list-group-item-action px-3 border-0 ripple col-12">
+                        <img class="float-left" src="https://cdn.thuvienphapluat.vn/phap-luat/2022/202201/PVQ/thang7/220719/305-1.jpg" height="100" width="100">
+                        <span class="float-left ml-3 mt-3">Mẫu đơn ly hôn</span>
+                    </button>
+                </div>
+            </div>
+            <div class="col-12 row hide list-group list-group-light" name="quyen">
+                <div class="col-12">
+                    @{
+                        mod = "#" + Model[2].modalId + "";
+                    }
+                    <button data-toggle="modal" data-target="@mod" class="list-group-item list-group-item-action px-3 border-0 ripple col-12">
+                        <img class="float-left" src="https://sanketoan.vn/public/library_staff/25094/images/tailieu2/5(16).PNG" height="100" width="100">
+                        <span class="float-left ml-3 mt-3">Quyết định bổ nhiệm</span>
+                    </button>
+                </div>
+            </div>
+            <div class="col-12 row hide list-group list-group-light" name="quyen">
+                <div class="col-12">
+                    @{
+                        mod = "#" + Model[3].modalId + "";
+                    }
+                    <button data-toggle="modal" data-target="@mod" class="list-group-item list-group-item-action px-3 border-0 ripple col-12">
+                        <img class="float-left" src="http://1001vieclam.com/bieu-mau-nhan-su/wp-content/uploads/2017/08/de-xuat-bo-nhiem-nhan-su-1.jpg" height="100" width="100">
+                        <span class="float-left ml-3 mt-3">Đề xuất bổ nhiệm nhân sự</span>
+                    </button>
+                </div>
+            </div>
+            <div class="col-12 row hide list-group list-group-light" name="dat">
+                <div class="col-12">
+                    @{
+                        mod = "#" + Model[4].modalId + "";
+                    }
+                    <button data-toggle="modal" data-target="@mod" class="list-group-item list-group-item-action px-3 border-0 ripple col-12">
+                        <img class="float-left" src="https://sudospaces.com/ketoanleanh/2020/10/hop-dong-mua-ban-nha-o.jpg" height="100" width="100">
+                        <span class="float-left ml-3 mt-3">Hợp đồng mua bán nhà ở và chuyển đổi quyền sử dung đất</span>
+                    </button>
+                </div>
+            </div>
+            <div class="col-12 row hide list-group list-group-light" name="dat">
+                <div class="col-12">
+                    @{
+                        mod = "#" + Model[5].modalId + "";
+                    }
+                    <button data-toggle="modal" data-target="@mod" class="list-group-item list-group-item-action px-3 border-0 ripple col-12">
+                        <img class="float-left" src="https://o.vdoc.vn/data/image/2022/06/09/don-khieu-nai-giai-quyet-tranh-chap-dat-dai-1.jpg" height="100" width="100">
+                        <span class="float-left ml-3 mt-3">Đơn khiếu nại lấn chiếm đất</span>
+                    </button>
+                </div>
+            </div>
+            <span class="hide text-danger ml-3 mt-3" id="message">Không tìm thấy kết quả nào !!!</span>
+        </div>
+    </div>
+</div>
+
+
+@foreach (var template in Model)
+{
+    var name = "" + template.modalId + "";
+    <div class="modal fade pop-up-1" id="@name" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myLargeModalLabel-1">@template.title</h4>
+                    <button type="button" class="close btn btn-danger" data-dismiss="modal" aria-hidden="true">X</button>
+                </div>
+                <div class="modal-body row">
+                    <img class="col-6 float-left" src="@template.url" height="500" alt="">
+                    <div class="col-6 float-left">
+                        <span class="h3">Giới thiệu chung</span>
+                        <p style="overflow-wrap: break-word;" class="justify-content-center mt-3">
+                            @template.description1
+                        </p>
+                        <p style="overflow-wrap: break-word;" class="mt-3 justify-content-center">
+                            @template.description2
+                        </p>
+                    </div>
+                </div>
+                <div class="modal-footer col-12">
+                    <a type="button" class="btn btn-success" asp-controller="Home" asp-action="New">Tạo mẫu</a>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+
+    <!-- /.modal mixer image -->
+}
+<!--  Modal content for the lion image example -->
+<script>
+    /* JS comes here */
+    function runSpeechRecognition() {
+        var audio = new Audio('js/speak.mp3');
+        audio.play();
+        setTimeout(() => {
+            document.getElementById('search').value = '';
+            // get output div reference
+            var output = document.getElementById("output");
+            // get action element reference
+            var action = document.getElementById("action");
+            var sea = document.getElementById("sea");
+            // new speech recognition object
+            var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+            var recognition = new SpeechRecognition();
+
+            // This runs when the speech recognition service starts
+            recognition.onstart = function () {
+                action.innerHTML = "<span>Hãy nói....</span>";
+            };
+
+            recognition.onspeechend = function () {
+                action.innerHTML = "<span>Đã hoàn thành</span>";
+                recognition.stop();
+            };
+
+            // This runs when the speech recognition service returns result
+            recognition.onresult = function (event) {
+                var transcript = event.results[0][0].transcript;
+                var confidence = event.results[0][0].confidence;
+                // document.getElementById("search").setAttribute('value', "" + transcript + "");
+                document.getElementById('search').value = "" + transcript + "";
+                search(1);
+            };
+
+            // start recognition
+            recognition.start();
+        }, 1500);
+
+    }
+    function search(id) {
+        document.getElementsByName("kethon")[0].classList.add("hide");
+        document.getElementsByName("kethon")[1].classList.add("hide");
+        document.getElementsByName("dat")[0].classList.add("hide");
+        document.getElementsByName("dat")[1].classList.add("hide");
+        document.getElementsByName("quyen")[0].classList.add("hide");
+        document.getElementsByName("quyen")[1].classList.add("hide");
+        document.getElementById("message").classList.add("hide");
+        if (id == 1) {
+            searchProcess();
+        }
+        else if (event.key == 'Enter') {
+            searchProcess();
+        }
+    }
+    function searchProcess() {
+        var sear = document.getElementById('search').value.toLowerCase();
+        var pos = sear.search("hôn");
+        var dat = sear.search("đất");
+        var bn = sear.search("bổ nhiệm");
+        if (pos > -1) {
+            var layout = document.getElementsByName("kethon");
+            layout[0].classList.remove("hide");
+            layout[1].classList.remove("hide");
+        }
+        else if (dat > -1) {
+            var layout = document.getElementsByName("dat");
+            layout[0].classList.remove("hide");
+            layout[1].classList.remove("hide");
+        }
+        else if (bn > -1) {
+            var layout = document.getElementsByName("quyen");
+            layout[0].classList.remove("hide");
+            layout[1].classList.remove("hide");
+        }
+        else {
+            document.getElementById("message").classList.remove("hide");
+            var audio = new Audio('js/notfound.mp3');
+            audio.play();
+    @*  setTimeout(() => {
+
+                }, 5000);*@
+                     }
+    }
+    function showAll() {
+        document.getElementById("default").classList.add("hide");
+        document.getElementById("all").classList.remove("hide");
+        document.getElementById("show").classList.add("hide");
+        document.getElementById("back").classList.remove("hide");
+    }
+    function back() {
+        document.getElementById("all").classList.add("hide");
+        document.getElementById("default").classList.remove("hide");
+        document.getElementById("back").classList.add("hide");
+        document.getElementById("show").classList.remove("hide");
+    }
+</script>

@@ -1,0 +1,31 @@
+{
+  "CacheSourceKey": "x9ynig",
+  "CachePdfKey": "x9ynig/x9ynig-o8z23i.pdf",
+  "CacheXpzKey": "x9ynig/x9ynig-m26tm8.xpz",
+  "CacheInfoKey": "x9ynig/x9ynig-m26tm8.json",
+  "CacheCopyKey": null,
+  "Document": "Type=FileSystem;File=abc.docx;Location=\"Type=Physical;Path=file\"",
+  "DocumentFileName": "abc.docx",
+  "DownloadFileName": null,
+  "InputOptions": {
+    "$type": "GleamTech.DocumentUltimate.WordProcessingInputOptions, GleamTech.DocumentUltimate",
+    "FieldFileName": "abc.docx",
+    "UpdateFields": true,
+    "Encoding": null,
+    "Format": "Docx",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Attachments": [],
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "x9ynig",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  },
+  "Attachments": []
+}

@@ -1,0 +1,133 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Login";
+    Layout = "";
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>@ViewData["Title"]</title>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <style>
+            body {
+                background-image: url("https://wallpapercave.com/wp/wp3566638.jpg");
+                width: 100%;
+                height: 100%;
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+            }
+
+            .row {
+                padding-top: 170px;
+            }
+
+            .login_form {
+                width: 80%;
+                max-width: 350px;
+                display: block;
+                margin: 0 auto;
+                background: #fd9906;
+                border-bottom: 10px solid brown;
+                padding: 30px;
+                position: relative;
+            }
+
+                .login_form:before, .login_form:after {
+                    position: absolute;
+                    content: '';
+                    top: 8px;
+                    width: 50px;
+                    height: 102%;
+                    background: brown;
+                    border-radius: 0px;
+                    z-index: -1;
+                }
+
+                .login_form:before {
+                    transform: skew(3deg);
+                    left: -10px;
+                }
+
+                .login_form:after {
+                    transform: skew(-3deg);
+                    right: -10px;
+                }
+
+            .form_title {
+                margin: 5px 0 40px 0;
+                text-align: center;
+                color: yellow;
+                text-shadow: 1px 1px 1px #888;
+            }
+
+            .form-control, .btn {
+                margin: 0 auto;
+                border-radius: 0;
+                border: 0;
+                transform-origin: right top;
+                box-shadow: 0.5px 1.5px 1px #666;
+            }
+
+            .btn {
+                width: 100%;
+                background: #fff;
+                cursor: pointer;
+            }
+
+            @@keyframes show {
+                from {
+                    opacity: 0;
+                    border-radius: 100px;
+                    transform: translateY(50px);
+                }
+
+                to {
+                    opacity: 1;
+                    border-radius: 0;
+                    transform: translateY(0px);
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <form id="account" method="post" class="login_form">
+                    <h2 id="account" method="post" class="form_title">Đăng nhập</h2>
+                    <div class="form-group">
+                        <input class="form-control" asp-for="Input.Email" placeholder="* Email" style="animation:show 0.8s cubic-bezier(0.18, 0.89, 0.32, 1.28);" />
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" asp-for="Input.Password" placeholder="* Mật khẩu" style="animation:show 0.9s cubic-bezier(0.18, 0.89, 0.32, 1.28);" />
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox" style="animationshow 0.5s ease-in;">
+                            <label><input asp-for="Input.RememberMe" style="animation:show 1s cubic-bezier(0.18, 0.89, 0.32, 1.28);"> Ghi nhớ</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-default" style="animation:show 1.2s cubic-bezier(0.18, 0.89, 0.32, 1.28);">Đăng nhập</button>
+                    </div>
+                    <div class="d-flex justify-content-center links">
+                        Chưa có tài khoản?&nbsp;
+                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Đăng kí</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+    </html>

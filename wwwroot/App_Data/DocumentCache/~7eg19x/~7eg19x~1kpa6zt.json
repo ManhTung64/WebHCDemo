@@ -1,0 +1,31 @@
+{
+  "CacheSourceKey": "7eg19x",
+  "CachePdfKey": "7eg19x/7eg19x-1r9jhyp.pdf",
+  "CacheXpzKey": "7eg19x/7eg19x-1kpa6zt.xpz",
+  "CacheInfoKey": "7eg19x/7eg19x-1kpa6zt.json",
+  "CacheCopyKey": null,
+  "Document": "Type=FileSystem;File=ex3.docx;Location=\"Type=Physical;Path=file\"",
+  "DocumentFileName": "ex3.docx",
+  "DownloadFileName": null,
+  "InputOptions": {
+    "$type": "GleamTech.DocumentUltimate.WordProcessingInputOptions, GleamTech.DocumentUltimate",
+    "FieldFileName": "ex3.docx",
+    "UpdateFields": true,
+    "Encoding": null,
+    "Format": "Docx",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Attachments": [],
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "7eg19x",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  },
+  "Attachments": []
+}

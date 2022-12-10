@@ -1,0 +1,31 @@
+{
+  "CacheSourceKey": "16xbi2w",
+  "CachePdfKey": "16xbi2w/16xbi2w-d6xe9b.pdf",
+  "CacheXpzKey": "16xbi2w/16xbi2w-15v1904.xpz",
+  "CacheInfoKey": "16xbi2w/16xbi2w-15v1904.json",
+  "CacheCopyKey": null,
+  "Document": "Type=FileSystem;File=.docx;Location=\"Type=Physical;Path=file\"",
+  "DocumentFileName": ".docx",
+  "DownloadFileName": null,
+  "InputOptions": {
+    "$type": "GleamTech.DocumentUltimate.WordProcessingInputOptions, GleamTech.DocumentUltimate",
+    "FieldFileName": ".docx",
+    "UpdateFields": true,
+    "Encoding": null,
+    "Format": "Docx",
+    "Password": null
+  },
+  "PdfOutputOptions": {
+    "Watermarks": [],
+    "FastWebViewEnabled": false,
+    "Password": null,
+    "Attachments": [],
+    "Format": "Pdf"
+  },
+  "XpzOutputOptions": {
+    "Password": "16xbi2w",
+    "HighQualityEnabled": false,
+    "Format": "Xpz"
+  },
+  "Attachments": []
+}

@@ -1,0 +1,352 @@
+﻿@model List<Record>
+<body onload="oldField('@TempData["id"]')">
+    <div class="row">
+        <div class="col-md-2">
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow d-block">
+                <a class="navbar-brand">Máy tính</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".show-hidden1">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse show-hidden1 d-sm-inline-flex">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            C:
+                            <ul>
+                                <li style="list-style: none;"><a>Documents</a></li>
+                                <li style="list-style: none;"><a>Download</a></li>
+                                <li style="list-style: none;"><a>Desktop</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow d-block">
+                <a class="navbar-brand">Lưu trữ</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".show-hidden2">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse show-hidden2 d-sm-inline-flex">
+                    <ul>
+                        <li style="list-style: none;"><a asp-controller="Home" asp-action="Index" asp-route-cate="1">Tài liệu của tôi</a></li>
+                        <li style="list-style: none;"><a asp-controller="Home" asp-action="Index" asp-route-cate="2">FGW-Documents</a> </li>
+                        <li style="list-style: none;"><a asp-controller="Home" asp-action="Index" asp-route-cate="3">Sở giáo dục</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow d-block">
+                <a class="navbar-brand">Tìm kiếm</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".show-hidden">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse show-hidden d-sm-inline-flex">
+                    <table class="table table-borderless text-center">
+                        <tr>
+                            <th>Thẻ</th>
+                            <th>Số lượng</th>
+                        </tr>
+                        @{
+                            var number = 0;
+                        }
+                        @foreach (var category in ViewBag.Categories)
+                        {
+
+                            <tr>
+                                <td>@category.Name</td>
+                                <td>@ViewBag.numberOfRecord[number++]</td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </nav>
+        </div>
+        <div class="col-md-10">
+            <div class="row">
+                <div class="col-7 border rounded mx-auto">
+                    <div>
+                        <ul class="nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Danh mục tài liệu</a>
+                                <hr class="bg-primary" />
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href="#">So sánh tài liệu</a>
+                                <hr />
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href="#">Thêm ghi chú</a>
+                                <hr />
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <table class="table text-center table-responsive" height="220px">
+                            <thead>
+                                <tr>
+                                    <th>Tài liệu</th>
+                                    <th>Loại tài liệu</th>
+                                    <th>Ngày sửa đổi</th>
+                                    <th>Phiên bản</th>
+                                    <th colspan="2">Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var record in Model)
+                                {
+                                    if(ViewBag.cate < 0){
+                                        <tr id="@record.Category.Name" class="@record.id">
+                                            <form asp-controller="Home" asp-action="Index" asp-route-id="@record.id">
+                                            <td><input class="btn-link" type="submit" value="@record.document_name" style="border: none; background-color: white;" /></td>
+                                            </form>
+                                            <td>@record.Category.Name</td>
+                                            <td>@record.last_fix phút trước</td>
+                                            <td>@record.version</td>
+                                            <td><a class="btn btn-primary btn-sm text-white">Mở</a></td>
+                                            <td><a asp-controller="Home" asp-action="Delete" asp-route-id="@record.id"  onclick="return confirm('Bạn có chắc chắn muốn xóa tài liệu này?')" class="btn btn-danger btn-sm text-white">Xóa</a></td>
+                                        </tr>
+                                        
+                                    }
+                                    else{
+                                        @if (record.id >= ViewBag.cate  && ViewBag.cate + 1 >= record.id)
+                                        {
+                                            <tr id="@record.Category.Name" class="@record.id">
+                                        <form asp-controller="Home" asp-action="Index" asp-route-id="@record.id">
+                                        <td><input class="btn-link" type="submit" value="@record.document_name" style="border: none; background-color: white;" /></td>
+                                        </form>
+                                        <td>@record.Category.Name</td>
+                                        <td>@record.last_fix phút trước</td>
+                                        <td>@record.version</td>
+                                        <td><a class="btn btn-primary btn-sm text-white">Mở</a></td>
+                                        <td><a asp-controller="Home" asp-action="Delete" asp-route-id="@record.id"  onclick="return confirm('Bạn có chắc chắn muốn xóa tài liệu này?')" class="btn btn-danger btn-sm text-white">Xóa</a></td>
+                                        </tr>
+                                        }
+                                    }
+                                   
+                                }
+                            </tbody>
+                        </table>
+                        <div class="d-flex justify-content-center">
+                            <ul class="pagination">
+                                @{
+                                    int numberPage = ViewBag.NumberPage;
+                                    int currentPage = ViewBag.CurrentPage;
+                                    for (int i = 1; i <= numberPage; i++)
+                                    {
+                                        if (i == currentPage)
+                                        {
+                                                    <li class="page-item active"><a class="page-link" href="?page=@i">@i</a></li>
+                                        }
+                                        else
+                                        {
+                                                    <li class="page-item"><a class="page-link" href="?page=@i">@i</a></li>
+                                        }
+                                    }
+                                }
+                            </ul>
+                        </div>
+                        <div>
+                            Loại tài liệu &nbsp;
+                            @foreach (var category in ViewBag.Categories)
+                            {
+                                <div class="form-check-inline">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" onclick="filter('@category.Name')" name="opradio">@category.Name
+                                    </label>
+                                </div>
+                            }
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" onclick="filter(1)" name="opradio">Tất cả
+                                </label>
+                            </div>
+                        </div>
+                        <div class="my-2">
+                            <a asp-action="ChoosingTemplate" asp-controller="Home" class="btn btn-primary container-fluid">Thêm mới</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 border rounded mx-auto" name="preview">
+                    <h5 class="text-center pt-3">Xem trước tài liệu</h5>
+                    @if (TempData["image"] == null)
+                    {
+                        <div class="bg-light d-flex justify-content-center align-items-center">
+                            <div class="bg-light d-flex justify-content-center align-items-center" style="width: 100%; height: 320px;">320x320</div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="bg-light d-flex justify-content-center align-items-center"><img src="~/image/@TempData["image"]" width="100%" height="320px" /></div>
+                    }
+                    <button class="btn btn-primary container-fluid mt-4">Chỉnh sửa chi tiết</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-9">
+                    <h5 class="text-primary">Thông tin chi tiết</h5>
+                    <hr class="bg-primary" />
+                    <div class="row">
+                        <div class="col-3 form-group">
+                            <label for="document-id">Mã tài liệu:</label>
+                            @if (TempData["document_id"] != null)
+                            {
+                                <input type="text" class="form-control" id="document-id" value="@TempData["document_id"]">
+                            }
+                            else
+                            {
+                                <input type="text" class="form-control" id="document-id">
+                            }
+                        </div>
+                        <div class="col-3 form-group">
+                            <label for="document-type">Loại tài liệu:</label>
+                            @if (TempData["category_id"] == null)
+                            {
+                                <select class="form-control" id="document-type">
+                                    <option value="0">Hãy chọn loại tài liệu</option>
+                                    @foreach (var category in ViewBag.Categories)
+                                    {
+                                        <option value="@category.Id">@category.Name</option>
+                                    }
+                                </select>
+                            }
+                            else
+                            {
+                                <select class="form-control" id="document-type">
+                                    @foreach (var category in ViewBag.Categories)
+                                    {
+                                        if (category.Id.ToString() == TempData["category_id"].ToString())
+                                        {
+                                            <option value="@category.Id" selected>@category.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@category.Id">@category.Name</option>
+                                        }
+                                    }
+                                </select>
+                            }
+                        </div>
+                        @if (TempData["signed_day"] == null)
+                        {
+                            <div class="col-3 form-group">
+                                <label for="signed-day">Ngày ký:</label>
+                                <input type="date" class="form-control" id="signed-day">
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-3 form-group">
+                                <label for="signed-day">Ngày ký:</label>
+                                <input type="text" class="form-control" id="signed-day" value="@TempData["signed_day"].ToString()">
+                            </div>
+                        }
+                        <div class="col-3 form-group">
+                            <label for="book-number">Số sổ:</label>
+                            @if (TempData["book_number"] != null)
+                            {
+                                <input type="text" class="form-control" id="book-number" value="@TempData["book_number"]">
+                            }
+                            else
+                            {
+                                <input type="text" class="form-control" id="book-number">
+                            }
+                        </div>
+                    </div>
+                    <div class="row">
+                        @if (TempData["dear_to"] == null)
+                        {
+                            <div class="col-6 form-group">
+                                <label for="dear_to">Kính gửi:</label>
+                                <textarea rows="3" class="form-control" id="dear_to"></textarea>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-6 form-group">
+                                <label for="dear_to">Kính gửi:</label>
+                                <textarea rows="3" class="form-control" id="dear_to">@TempData["dear_to"]</textarea>
+                            </div>
+                        }
+                        @if (TempData["destination"] == null)
+                        {
+                            <div class="col-6 form-group">
+                                <label for="destination">Nơi nhận:</label>
+                                <textarea rows="3" class="form-control" id="destination"></textarea>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-6 form-group">
+                                <label for="destination">Nơi nhận:</label>
+                                <textarea rows="3" class="form-control" id="destination">@TempData["destination"]</textarea>
+                            </div>
+                        }
+                    </div>
+                    <div>
+                        @if (TempData["content"] == null)
+                        {
+                            <div class="form-group">
+                                <label for="content">Nội dung:</label>
+                                <textarea rows="5" class="form-control" id="content"></textarea>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="form-group">
+                                <label for="content">Nội dung:</label>
+                                <textarea rows="5" class="form-control" id="content">@TempData["content"]</textarea>
+                            </div>
+                        }
+                    </div>
+                    <div><button class="btn btn-primary float-right">Cập nhật</button></div>
+                </div>
+                <div class="col-3">
+                    <h5>Các tài liệu liên quan</h5>
+                    <div class="row">
+                        @foreach (var record in Model)
+                        {
+                            if (TempData["category_id"] != null && record.CategoryId.Equals(TempData["category_id"]))
+                            {
+                                <div class="col-4">
+                                    <img src="~/image/@record.Image" width="100%" height="80px">
+                                </div>
+                                <div class="col-8 d-flex justify-content-center align-items-center">
+                                    <form asp-controller="Home" asp-action="Index" asp-route-id="@record.id">
+                                        <input class="btn-link" type="submit" value="@record.document_name" style="border: none; background-color: white;" />
+                                    </form>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    function filter(cate) {
+        document.getElementById("Nghị định").classList.remove("hide");
+        document.getElementById("Thông báo").classList.remove("hide");
+        document.getElementById("Quyết định").classList.remove("hide");
+        if (cate === "Quyết định") {
+            document.getElementById("Nghị định").classList.add("hide");
+            document.getElementById("Thông báo").classList.add("hide");
+        }
+        else if (cate === "Nghị định") {
+            document.getElementById("Quyết định").classList.add("hide");
+            document.getElementById("Thông báo").classList.add("hide");
+        }
+        else if (cate === "Thông báo") {
+            document.getElementById("Nghị định").classList.add("hide");
+            document.getElementById("Quyết định").classList.add("hide");
+        }
+        else {
+            document.getElementById("Nghị định").classList.remove("hide");
+            document.getElementById("Thông báo").classList.remove("hide");
+            document.getElementById("Quyết định").classList.remove("hide");
+        }
+    }
+    function oldField(id) {
+        document.getElementsByClassName(id)[0].style.backgroundColor = "grey";
+    }
+</script>
+
+
