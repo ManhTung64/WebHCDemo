@@ -170,6 +170,7 @@
             // new speech recognition object
             var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
             var recognition = new SpeechRecognition();
+            recognition.lang = 'vi-VN';
 
             // This runs when the speech recognition service starts
             recognition.onstart = function () {
